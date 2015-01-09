@@ -1,2 +1,2 @@
 # vagrant-alm
-Provision ALM environment using Vagrant 
+Provisioning ALM environment using Vagrant 
