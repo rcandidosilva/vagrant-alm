@@ -14,7 +14,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.provision :shell, path: "bootstrap.sh"
   config.vm.network :forwarded_port, host: 9000, guest: 9000
-  config.vm.synced_folder "www", "/var/www"
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
