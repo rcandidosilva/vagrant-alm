@@ -80,8 +80,10 @@ PATH=$JAVA_HOME/bin:$PATH
 source $HOME/.bashrc
 
 #Install SonarCube
-wget --progress=bar:force --no-cookies --no-check-certificate http://dist.sonar.codehaus.org/sonarqube-4.5.2.zip
-unzip sonarqube-4.5.2.zip
+SONAR_VERSION=4.5.2
+
+wget --progress=bar:force --no-cookies --no-check-certificate http://dist.sonar.codehaus.org/sonarqube-$SONAR_VERSION.zip
+unzip sonarqube-$SONAR_VERSION.zip
 
 sudo ln -s /opt/sonarqube-4.5.2/bin/linux-x86-64/sonar.sh /usr/bin/sonar
 sudo cp /vagrant/replacement_files/sonar /etc/init.d/sonar
