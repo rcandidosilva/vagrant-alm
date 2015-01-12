@@ -53,21 +53,26 @@ chkconfig httpd on
 sudo service httpd start
 
 #Install Redmine
-#mysql --user=root --password=root_password_mysql
-#create database redmine_db character set utf8;
-#create user 'redmine_admin'@'localhost' identified by 'your_new_password';
-#grant all privileges on redmine_db.* to 'redmine_admin'@'localhost';
-#quit;
+echo "Do you want the Redmine?"
+read redmine
 
-#cd /var/www
-#wget http://www.redmine.org/releases/redmine-2.5.0.tar.gz
+if [ $redmine = "y" ] || [ $redmine = "Y" ]; then
+  mysql --user=root --password=root_password_mysql
+  create database redmine_db character set utf8;
+  create user 'redmine_admin'@'localhost' identified by 'your_new_password';
+  grant all privileges on redmine_db.* to 'redmine_admin'@'localhost';
+  quit;
 
-#tar xvfz redmine-2.5.0.tar.gz
-#mv redmine-2.5.0 redmine
-#rm -rf redmine-2.5.0.tar.gz
+  cd /var/www
+  wget http://www.redmine.org/releases/redmine-2.5.0.tar.gz
 
-#cd /var/www/redmine/config
-#cp database.yml.example database.yml
+  tar xvfz redmine-2.5.0.tar.gz
+  mv redmine-2.5.0 redmine
+  rm -rf redmine-2.5.0.tar.gz
+
+  cd /var/www/redmine/config
+  cp database.yml.example database.yml
+fi
 
 #Install JDK
 #sudo wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u55-b13/jdk-7u55-linux-x64.rpm
@@ -80,16 +85,17 @@ PATH=$JAVA_HOME/bin:$PATH
 source $HOME/.bashrc
 
 #Install SonarCube
+
 SONAR_VERSION=4.5.2
 
 wget --progress=bar:force --no-cookies --no-check-certificate http://dist.sonar.codehaus.org/sonarqube-$SONAR_VERSION.zip
 unzip sonarqube-$SONAR_VERSION.zip
 
-sudo ln -s /opt/sonarqube-4.5.2/bin/linux-x86-64/sonar.sh /usr/bin/sonar
+sudo ln -s /opt/sonarqube-$SONAR_VERSION/bin/linux-x86-64/sonar.sh /usr/bin/sonar
 sudo cp /vagrant/replacement_files/sonar /etc/init.d/sonar
 sudo chmod 755 /etc/init.d/sonar
 sudo chkconfig --add sonar
-sudo cp -f /vagrant/replacement_files/sonar.properties /opt/sonarqube-4.5.2/conf
+sudo cp -f /vagrant/replacement_files/sonar.properties /opt/sonarqube-$SONAR_VERSION/conf
 sudo mysql < /vagrant/scripts/sonar.sql
 
 /etc/init.d/sonar start

@@ -12,8 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
 
   config.vm.box = "chef/centos-6.5"
-  config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.provision :shell, path: "bootstrap0.sh"
   config.vm.network :forwarded_port, host: 9000, guest: 9000
+  config.vm.network :forwarded_port, host: 8085, guest: 8085
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
@@ -52,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--cpus", "1"]
     #vb.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
     #vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
