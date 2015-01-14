@@ -22,5 +22,5 @@ sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stab
 sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
 
 sudo yum -y install jenkins
-sudo cp /vagrant/alm-config/jenkins /etc/sysconfig/jenkins
+sudo cp /vagrant/alm-config/jenkins/jenkins.properties /etc/sysconfig/jenkins
 sudo service jenkins start

@@ -12,9 +12,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
 
   config.vm.box = "chef/centos-6.5"
-  config.vm.provision :shell, path: "bootstrap0.sh"
+  config.vm.provision :shell, path: "bootstrap1.sh"
   config.vm.network :forwarded_port, host: 9000, guest: 9000
   config.vm.network :forwarded_port, host: 8085, guest: 8085
+  config.vm.network :forwarded_port, host: 8086, guest: 8086
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
