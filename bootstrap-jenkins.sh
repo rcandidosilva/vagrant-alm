@@ -1,4 +1,6 @@
 #!/bin/sh
+cd /opt
+
 sudo yum -y install wget
 sudo yum -y install java-1.8.0-openjdk
 
@@ -15,8 +17,6 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 /sbin/service iptables save
 iptables -L -v
-
-cd /opt
 
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key

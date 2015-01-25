@@ -1,14 +1,15 @@
 #!/bin/sh
+cd /opt
+
 sudo yum -y install wget
 sudo yum -y install java-1.8.0-openjdk
 
 #Setup firewall rules
 iptables -F
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT #SSH
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT #HTTP
-iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-iptables -I INPUT -p tcp --dport 3306 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -I OUTPUT -p tcp --sport 3306 -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --dport 22   -j ACCEPT #SSH
+iptables -A INPUT -p tcp --dport 80   -j ACCEPT #HTTP
+iptables -A INPUT -p tcp --dport 443  -j ACCEPT #HTTPS
+iptables -I INPUT -p tcp --dport 3306 -j ACCEPT #MYSQL
 iptables -A INPUT -p tcp --dport 8086 -j ACCEPT #SONAR
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
@@ -17,8 +18,6 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 /sbin/service iptables save
 iptables -L -v
-
-cd /opt
 
 #Install MySQL server
 sudo yum -y install mysql-server
