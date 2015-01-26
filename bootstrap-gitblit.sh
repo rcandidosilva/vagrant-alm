@@ -22,6 +22,7 @@ sudo mkdir -p /opt/gitblit;
 cd /opt/gitblit;
 sudo wget http://dl.bintray.com/gitblit/releases/gitblit-1.6.2.tar.gz
 sudo tar -zxf gitblit-1.6.2.tar.gz;
+sudo rm gitblit-1.6.2.tar.gz;
 
 sudo cp /vagrant/alm-config/gitblit/gitblit.properties /opt/gitblit/data/gitblit.properties
 sudo cp /vagrant/alm-config/gitblit/service-centos.sh /etc/init.d/gitblit
