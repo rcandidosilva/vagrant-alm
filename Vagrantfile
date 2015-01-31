@@ -13,7 +13,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "chef/centos-6.5"
   config.vm.provision :shell, path: "bootstrap.sh"
-  config.vm.network :forwarded_port, host: 9000, guest: 9000
+
+  config.vm.network :forwarded_port, host: 8085, guest: 8085
+  config.vm.network :forwarded_port, host: 8086, guest: 8086
+  config.vm.network :forwarded_port, host: 8087, guest: 8087
+  config.vm.network :forwarded_port, host: 8088, guest: 8088
+  config.vm.network :forwarded_port, host: 8089, guest: 8089
   config.ssh.forward_agent = true
   config.ssh.forward_x11 = true
 
@@ -52,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
-    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--cpus", "1"]
     #vb.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
     #vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
