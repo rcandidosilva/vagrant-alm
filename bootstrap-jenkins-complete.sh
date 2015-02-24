@@ -1,18 +1,17 @@
 #!/bin/sh
 sudo yum -y install wget
 sudo yum -y install java-1.8.0-openjdk
-#Install MySQL server
-/vagrant/bootstrap-mysql.sh
-#Install Jenkins
-/vagrant/bootstrap-jenkins.sh
-#Install Sonar
-/vagrant/bootstrap-sonar.sh
-#Install Nexus
-/vagrant/bootstrap-nexus.sh
-#Install Gitblit
-#/vagrant/bootstrap-gitblit.sh
-#Setup firewall rules
+
+cd /opt
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+sudo rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+
+sudo yum -y install jenkins
+sudo cp /vagrant/alm-config/jenkins/jenkins.properties /etc/sysconfig/jenkins
+sudo service jenkins start
+
 iptables -F
+iptables -A INPUT -p tcp --dport 8085 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT #SSH
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT #HTTP
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT #HTTPS
