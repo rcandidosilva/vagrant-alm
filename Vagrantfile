@@ -8,8 +8,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "jenkins" do |jenkins|
     jenkins.vm.box = "chef/centos-6.5"
-    jenkins.vm.provision :shell, path: "bootstrap-jenkins-complete.sh"
+    jenkins.vm.provision :shell, path: "jenkins.sh"
     jenkins.vm.network :forwarded_port, host: 8085, guest: 8085
+    jenkins.vm.network "private_network", ip: "192.168.50.5"
 
     jenkins.vm.provider "virtualbox" do |vb|
         vb.name= "jenkins"
@@ -21,9 +22,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "sonar" do |sonar|
     sonar.vm.box = "chef/centos-6.5"
-    sonar.vm.provision :shell, path: "bootstrap-sonar-complete.sh"
+    sonar.vm.provision :shell, path: "sonar.sh"
     sonar.vm.network :forwarded_port, host: 3306, guest: 3306
     sonar.vm.network :forwarded_port, host: 8086, guest: 8086
+    sonar.vm.network "private_network", ip: "192.168.50.6"
 
     sonar.vm.provider "virtualbox" do |vb|
       vb.name= "sonar"
@@ -35,9 +37,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "gitblit", autostart: false do |gitblit|
     gitblit.vm.box = "chef/centos-6.5"
-    gitblit.vm.provision :shell, path: "bootstrap-gitblit-complete.sh"
+    gitblit.vm.provision :shell, path: "gitblit.sh"
     gitblit.vm.network :forwarded_port, host: 8087, guest: 8087
     gitblit.vm.network :forwarded_port, host: 8088, guest: 8088
+    gitblit.vm.network "private_network", ip: "192.168.50.7"
 
     gitblit.vm.provider "virtualbox" do |vb|
       vb.name= "gitblit"
@@ -49,8 +52,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "nexus" do |nexus|
     nexus.vm.box = "chef/centos-6.5"
-    nexus.vm.provision :shell, path: "bootstrap-nexus-complete.sh"
+    nexus.vm.provision :shell, path: "nexus.sh"
     nexus.vm.network :forwarded_port, host: 8089, guest: 8089
+    nexus.vm.network "private_network", ip: "192.168.50.9"
 
     nexus.vm.provider "virtualbox" do |vb|
       vb.name= "nexus"
