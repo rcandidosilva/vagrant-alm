@@ -5,7 +5,7 @@ Softwares:
 
 Gitblit : Source Control Management (SCM) <br/>
 Jenkins: Continuous Integration (CI) <br/>
-Sonar: software quality QA <br/>
+Sonar: Software Quality QA <br/>
 Nexus: Repository Manager<br/>
 Redmine: Missing...<br/>
 <br/>
